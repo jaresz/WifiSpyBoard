@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+
+{% block stylesheets %} {% stylesheets '@bootstrap_css' '@main_css' %}
+<link rel="stylesheet" type="text/css" media="screen"
+	href="{{ asset_url }}" />
+{% endstylesheets %} {% endblock %} {% javascripts '@jquery'
+'@bootstrap_js' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<title>{% block title %}WifiSpyBoard{% endblock %}</title>
+
+</head>
+<body>
+	<div class="header">{% block navigation %} {{
+		include('elements/navigation.html.twig') }} {% endblock %}</div>
+    	<div class="main_content">
+    		
+    	{% for flash_message in app.session.flashbag.get('danger') %}
+        <div class="alert alert-danger alert-dismissible niezaszer" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          {{ flash_message|raw }}
+        </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashbag.get('info') %}
+        <div class="alert alert-info alert-dismissible niezaszer" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          {{ flash_message|raw }}
+        </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashbag.get('warning') %}
+        <div class="alert alert-warning alert-dismissible niezaszer" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          {{ flash_message|raw }}
+        </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashbag.get('success') %}
+        <div class="alert alert-success alert-dismissible niezaszer" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          {{ flash_message|raw }}
+        </div>
+        {% endfor %}
+	{% block body %}{% endblock %}
+	</div>
+</body>
+</html>

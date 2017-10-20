@@ -1,0 +1,75 @@
+body {
+  background-color: #e8e8e8;
+}
+
+.header {
+	height: 50px;
+}
+
+
+.form-signin {
+  max-width: 340px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading {
+	font-size: 1.5em;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 12px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+div.main_content {
+	margin: 10px 20px;	
+}
+
+.al-right {
+	text-align: right;
+}
+
+.al-left {
+	text-align: left;
+}
+
+.clientName {
+	font-weight: bold;
+	color: #000;	
+	background: #ffc;
+	padding: 0.4em;
+	border-radius: 0.4em;
+}
+
+.clientMac {
+	font-weight: normal;
+	font-size: 60%;
+	color: #888;	
+	background: #eee;
+	padding: 0.2em;
+	border-radius: 0.2em;
+}

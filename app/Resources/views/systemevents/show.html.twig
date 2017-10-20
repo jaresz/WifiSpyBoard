@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Systemevent</h1>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Customerid</th>
+                <td>{{ systemevent.customerid }}</td>
+            </tr>
+            <tr>
+                <th>Receivedat</th>
+                <td>{% if systemevent.receivedat %}{{ systemevent.receivedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Devicereportedtime</th>
+                <td>{% if systemevent.devicereportedtime %}{{ systemevent.devicereportedtime|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Facility</th>
+                <td>{{ systemevent.facility }}</td>
+            </tr>
+            <tr>
+                <th>Priority</th>
+                <td>{{ systemevent.priority }}</td>
+            </tr>
+            <tr>
+                <th>Fromhost</th>
+                <td>{{ systemevent.fromhost }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ systemevent.message }}</td>
+            </tr>
+            <tr>
+                <th>Ntseverity</th>
+                <td>{{ systemevent.ntseverity }}</td>
+            </tr>
+            <tr>
+                <th>Importance</th>
+                <td>{{ systemevent.importance }}</td>
+            </tr>
+            <tr>
+                <th>Eventsource</th>
+                <td>{{ systemevent.eventsource }}</td>
+            </tr>
+            <tr>
+                <th>Eventuser</th>
+                <td>{{ systemevent.eventuser }}</td>
+            </tr>
+            <tr>
+                <th>Eventcategory</th>
+                <td>{{ systemevent.eventcategory }}</td>
+            </tr>
+            <tr>
+                <th>Eventid</th>
+                <td>{{ systemevent.eventid }}</td>
+            </tr>
+            <tr>
+                <th>Eventbinarydata</th>
+                <td>{{ systemevent.eventbinarydata }}</td>
+            </tr>
+            <tr>
+                <th>Maxavailable</th>
+                <td>{{ systemevent.maxavailable }}</td>
+            </tr>
+            <tr>
+                <th>Currusage</th>
+                <td>{{ systemevent.currusage }}</td>
+            </tr>
+            <tr>
+                <th>Minusage</th>
+                <td>{{ systemevent.minusage }}</td>
+            </tr>
+            <tr>
+                <th>Maxusage</th>
+                <td>{{ systemevent.maxusage }}</td>
+            </tr>
+            <tr>
+                <th>Infounitid</th>
+                <td>{{ systemevent.infounitid }}</td>
+            </tr>
+            <tr>
+                <th>Syslogtag</th>
+                <td>{{ systemevent.syslogtag }}</td>
+            </tr>
+            <tr>
+                <th>Eventlogtype</th>
+                <td>{{ systemevent.eventlogtype }}</td>
+            </tr>
+            <tr>
+                <th>Genericfilename</th>
+                <td>{{ systemevent.genericfilename }}</td>
+            </tr>
+            <tr>
+                <th>Systemid</th>
+                <td>{{ systemevent.systemid }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ systemevent.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('system_events_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

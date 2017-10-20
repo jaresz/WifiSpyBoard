@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Client</h1>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ client.id }}</td>
+            </tr>
+            <tr>
+                <th>Mac</th>
+                <td>{{ client.mac }}</td>
+            </tr>
+            <tr>
+                <th>Ip</th>
+                <td>{{ client.ip }}</td>
+            </tr>
+            <tr>
+                <th>Selfname</th>
+                <td>{{ client.selfName }}</td>
+            </tr>
+            <tr>
+                <th>Givenname</th>
+                <td>{{ client.givenName }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{% if client.created %}{{ client.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{% if client.updated %}{{ client.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('client_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('client_edit', { 'id': client.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,150 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    #esi: ~
+    #translator: { fallbacks: ['%locale%'] }
+    translator: ~
+    secret: '%secret%'
+    router:
+        resource: '%kernel.project_dir%/app/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    session:
+        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes:
+        - bootstrap_3_layout.html.twig
+
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path: '%database_path%'
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+# Assetic Configuration
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    #bundles:        [ 'AppBundle', 'FOSUserBundle']
+    filters:
+        cssrewrite: ~
+        yui_css:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+    assets:
+        jquery:
+            inputs:
+                - "%kernel.root_dir%/../vendor/components/jquery/jquery.js"
+        bootstrap_js:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/js/bootstrap.js"
+#        jquery_ui_js:
+#            inputs:
+#                - "%kernel.root_dir%/../app/Resources/public/js/jquery-ui.js"
+        bootstrap_css:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap.css"
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap-theme.css"
+            filters: [cssrewrite]
+        main_css:
+            inputs:
+                - "%kernel.root_dir%/../app/Resources/public/css/main_css.css"
+#        jquery_ui_css:
+#            inputs:
+#                - "%kernel.root_dir%/../app/Resources/public/css/jquery-ui.css"
+#            filters: [cssrewrite]
+        bootstrap_glyphicons_ttf:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf"
+            output: "fonts/glyphicons-halflings-regular.ttf"
+        bootstrap_glyphicons_eot:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.eot"
+            output: "fonts/glyphicons-halflings-regular.eot"
+        bootstrap_glyphicons_svg:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.svg"
+            output: "fonts/glyphicons-halflings-regular.svg"
+        bootstrap_glyphicons_woff:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"
+            output: "fonts/glyphicons-halflings-regular.woff"
+        bootstrap_glyphicons_woff2:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"
+            output: "fonts/glyphicons-halflings-regular.woff2"
+
+knp_paginator:
+    page_range: 9                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+        
+# Swiftmailer Configuration
+swiftmailer:
+    transport: '%mailer_transport%'
+    host: '%mailer_host%'
+    username: '%mailer_user%'
+    password: '%mailer_password%'
+    spool: { type: memory }
+    
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    registration:
+      form:
+        type: AppBundle\Form\RegistrationType
+    profile:
+      form:
+        type: AppBundle\Form\ProfileType
+        
