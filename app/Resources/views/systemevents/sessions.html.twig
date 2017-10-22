@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Systemevents list</h1>
+	
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Host</th>
+                <th>Connected</th>
+                <th>Disconnected</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sinfo in sessionsInfo %}
+            <tr class="{% if sinfo.disconnectedOn %}danger{% else %}success{% endif %}">
+                <td>{{ sinfo.clientInfo|raw }}</td>
+                <td>{{ sinfo.FromHost }}</td>
+                <td>{{ sinfo.connectedOn|date('Y-m-d H:i:s') }}</td>
+                <td>{% if sinfo.disconnectedOn %}{{ sinfo.disconnectedOn|date('Y-m-d H:i:s') }}{% endif %}</td>
+                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

@@ -23,7 +23,9 @@
 							
 						<li class="{% if app.request.attributes.get('_route') starts with 'wifi_events' %}active{% endif %}"><a href="{{ path('wifi_events_index') }}">WiFi events</a></li> 
 							
-						<li class="{% if app.request.attributes.get('_route') starts with 'system_events' %}active{% endif %}"><a href="{{ path('system_events_index') }}">System events</a></li> 
+						<li class="{% if app.request.attributes.get('_route') starts with 'system_events' %}active{% endif %}"><a href="{{ path('system_events_index') }}">System events</a></li>
+						
+						<li class="{% if app.request.attributes.get('_route') starts with 'wifi_sessions' %}active{% endif %}"><a href="{{ path('wifi_sessions') }}">Wifi sessions</a></li>
 						
 						<li class="{% if app.request.attributes.get('_route') starts with 'client' %}active{% endif %}"><a href="{{ path('client_index') }}">Client Hosts</a></li> 
 						
