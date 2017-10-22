@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Systemevents list</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Receivedat</th>
+                <th>Devicereportedtime</th>
+                <th>Facility</th>
+                <th>Priority</th>
+                <th>Fromhost</th>
+                <th>Message</th>
+                <th>Infounitid</th>
+                <th>Syslogtag</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for systemevent in systemevents %}
+            <tr>
+                
+                <td>{% if systemevent.receivedat %}{{ systemevent.receivedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if systemevent.devicereportedtime %}{{ systemevent.devicereportedtime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ systemevent.facility }}</td>
+                <td>{{ systemevent.priority }}</td>
+                <td>{{ systemevent.fromhost }}</td>
+                <td>{{ systemevent.message|raw }}<br>
+                	{% if systemevent.eventConnected %}
+                		Connected: <strong>{{ systemevent.eventConnected.mac}}</strong> {{systemevent.eventConnected.systemEventConnected.id  }}<br>
+                	{% endif %} 
+                	{% if systemevent.eventDisconnected %}
+                		Disconnected: <strong>{{ systemevent.eventDisconnected.mac}}</strong> {{ systemevent.eventDisconnected.systemEventDisconnected.id }}
+                	{% endif %} 
+                </td>
+                <td>
+                	
+                	{{ systemevent.infounitid }}</td>
+                <td>{{ systemevent.syslogtag }}</td>
+                <td>{{ systemevent.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('system_events_show', { 'id': systemevent.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

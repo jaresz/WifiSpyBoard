@@ -174,9 +174,10 @@ class Client
      */
     public function getName()
     {
-        if ($this->getGivenName())
+        if (isset($this->givenName) && $this->givenName)
             return $this->givenName;
-        return $this->selfName;
+        else
+            return $this->selfName;
     }
 
     /**

@@ -45,7 +45,7 @@ class RefreshClientsDictionaryCommand extends ContainerAwareCommand
         
        
         
-        $output->writeln('RefreshClientsDictionaryCommand Test!');
+        $output->writeln('RefreshClientsDictionaryCommand');
         
         $conn = $this->getContainer()->get('doctrine.dbal.default_connection');
         $reta = $conn->fetchAll('SELECT deviceReportedTime, fromHost, GROUP_CONCAT(TRIM(Message) SEPARATOR "\n") as msg

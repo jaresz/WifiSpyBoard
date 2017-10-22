@@ -56,4 +56,19 @@ class ClientTools extends AbstractClassWithEntityManager
         }
         return $text;
     }
+    
+    public function getMacs($txt)
+    {
+        $matches = [];
+        preg_match_all("/\b[[:xdigit:]]{2}:[[:xdigit:]]{2}:[[:xdigit:]]{2}:[[:xdigit:]]{2}:[[:xdigit:]]{2}:[[:xdigit:]]{2}\b/su", $txt, $matches);
+        return $matches;
+    }
+    
+    public function getMac($txt)
+    {
+        $ms = $this->getMacs($txt);
+        if (count($ms) && isset($ms[0][0])) return $ms[0][0];
+        else return null;
+    }
+    
 }

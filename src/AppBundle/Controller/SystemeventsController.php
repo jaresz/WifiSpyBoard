@@ -33,8 +33,8 @@ class SystemeventsController extends Controller
             'Systemevents'
         ])
         ->from('AppBundle\Entity\Systemevents', 'Systemevents')
-        ->where("Systemevents.fromhost!=:mm")
-        ->setParameter('mm', 'mediomalina')
+        ->where("Systemevents.syslogtag='DHCP:' OR Systemevents.syslogtag='WiFi:'")
+
         ->addOrderBy('Systemevents.id', 'DESC')
         ->setMaxResults(90);
         

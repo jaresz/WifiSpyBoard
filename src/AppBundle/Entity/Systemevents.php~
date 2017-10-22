@@ -172,7 +172,20 @@ class Systemevents
      * @ORM\Column(name="SystemID", type="integer", nullable=true)
      */
     private $systemid;
+    
 
+    /**
+     * @ORM\OneToOne(targetEntity="EventConnected", inversedBy="systemEventConnected")
+     */
+    private $eventConnected;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="EventDisconnected", inversedBy="systemEventDisconnected")
+     */
+    private $eventDisconnected;
+    
+    
     /**
      * @var integer
      *
@@ -744,5 +757,53 @@ class Systemevents
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set eventConnected
+     *
+     * @param \AppBundle\Entity\EventConnected $eventConnected
+     *
+     * @return Systemevents
+     */
+    public function setEventConnected(\AppBundle\Entity\EventConnected $eventConnected = null)
+    {
+        $this->eventConnected = $eventConnected;
+
+        return $this;
+    }
+
+    /**
+     * Get eventConnected
+     *
+     * @return \AppBundle\Entity\EventConnected
+     */
+    public function getEventConnected()
+    {
+        return $this->eventConnected;
+    }
+
+    /**
+     * Set eventDisconnected
+     *
+     * @param \AppBundle\Entity\EventDisconnected $eventDisconnected
+     *
+     * @return Systemevents
+     */
+    public function setEventDisconnected(\AppBundle\Entity\EventDisconnected $eventDisconnected = null)
+    {
+        $this->eventDisconnected = $eventDisconnected;
+
+        return $this;
+    }
+
+    /**
+     * Get eventDisconnected
+     *
+     * @return \AppBundle\Entity\EventDisconnected
+     */
+    public function getEventDisconnected()
+    {
+        return $this->eventDisconnected;
     }
 }
