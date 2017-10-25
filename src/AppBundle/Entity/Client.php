@@ -33,6 +33,12 @@ class Client
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     protected $selfName;
+    
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=false)
+     */
+    protected $cssClass='';
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
@@ -226,5 +232,29 @@ class Client
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set cssClass
+     *
+     * @param string $cssClass
+     *
+     * @return Client
+     */
+    public function setCssClass($cssClass)
+    {
+        $this->cssClass = $cssClass;
+
+        return $this;
+    }
+
+    /**
+     * Get cssClass
+     *
+     * @return string
+     */
+    public function getCssClass()
+    {
+        return $this->cssClass;
     }
 }

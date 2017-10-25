@@ -13,7 +13,7 @@ class ClientType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('mac')->add('ip')->add('selfName')->add('givenName');
+        $builder->add('mac')->add('ip')->add('selfName')->add('givenName')->add('cssClass');
     }
     
     /**

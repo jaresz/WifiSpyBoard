@@ -68,8 +68,62 @@ div.main_content {
 .clientMac {
 	font-weight: normal;
 	font-size: 60%;
-	color: #888;	
+	color: #000;	
 	background: #eee;
 	padding: 0.2em;
 	border-radius: 0.2em;
 }
+
+.clientName.client0 {
+	color: #000000;
+	background-color: #eb6645;
+}
+.clientName.client1 {
+	color: #143d90;
+	background-color: #009ee1;
+}
+.clientName.client2 {
+	color: #dcdcdc;
+	background-color: #000000;
+}
+.clientName.client3 {
+	color: #000000;
+	background-color: #dcdcdc;
+}
+.clientName.client4 {
+	color: #010101;
+	background-color: #b9d165;
+}
+.clientName.client5 {
+	color: #cebca5;
+	background-color: #673b15;
+}
+.clientName.client6 {
+	color: #cebca5;
+	background-color: #673b15;
+}
+.clientName.client7 {
+	color: #f19da0;
+	background-color: #360947;
+}
+.clientName.client8 {
+	color: #673b15;
+	background-color: #fff69b;
+}
+.clientName.client9 {
+	color: #ffffff;
+	background-color: #e95d0f;
+}
+.clientName.client10 {
+	color: #b9d065;
+	background-color: #00501f;
+}
+.clientName.client11 {
+	color: #ffffff;
+	background-color: #0d0f49;
+}
+.clientName.client12 {
+	color: #000000;
+	background-color: #cdc16b;
+}
+

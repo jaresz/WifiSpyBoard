@@ -22,19 +22,15 @@
                 <td><a href="{{ path('client_show', { 'id': client.id }) }}">{{ client.id }}</a></td>
                 <td>{{ client.mac }}</td>
                 <td>{{ client.ip }}</td>
-                <td>{{ client.selfName }}</td>
+                <td><span class="clientName {{ client.cssClass }}"> {{ client.selfName }}</span></td>
                 <td>{{ client.givenName }}</td>
                 <td>{% if client.created %}{{ client.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if client.updated %}{{ client.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('client_show', { 'id': client.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('client_edit', { 'id': client.id }) }}">edit</a>
-                        </li>
-                    </ul>
+               			<div class="btn-group" role="group" aria-label="actions">
+                            <a href="{{ path('client_show', { 'id': client.id }) }}" class="btn btn-default" >show</a>
+                            <a href="{{ path('client_edit', { 'id': client.id }) }}" class="btn btn-primary" >edit</a>
+                		</div>
                 </td>
             </tr>
         {% endfor %}

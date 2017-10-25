@@ -20,6 +20,7 @@ class RefreshClientsDictionaryCommand extends ContainerAwareCommand
             $client['updated'] = $now->format('Y-m-d H:i:s');
             $conn->update('client', $client, ['id'=>$existing['id']]);
         } else {
+            $client['css_class'] = 'client'.rand(0,11); 
             $client['created'] = $now->format('Y-m-d H:i:s');
             $client['updated'] = $now->format('Y-m-d H:i:s');
             $conn->insert('client', $client);

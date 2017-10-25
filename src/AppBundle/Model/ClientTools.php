@@ -34,7 +34,7 @@ class ClientTools extends AbstractClassWithEntityManager
     public function replaceMacsByNames($text, $useHtml=true)
     {
         if ($useHtml) {
-            $htmlNamePre = '<span class="clientName">';
+            //$htmlNamePre = '<span class="clientName">';
             $htmlNameSuf = '</span> ';
             $htmlMacPre = '<span class="clientMac">';
             $htmlMacSuf = '</span>';
@@ -47,6 +47,9 @@ class ClientTools extends AbstractClassWithEntityManager
         foreach($this->clients as $client) {
             /** @var Client $client            
              */
+            if ($useHtml) {
+                $htmlNamePre = '<span class="clientName '.$client->getCssClass().'">';
+            }
             $count = 0;
             $replcd = str_replace($client->getMac(), $htmlNamePre.$client->getName().$htmlNameSuf.$htmlMacPre.$client->getMac().$htmlMacSuf, $text, $count);
             if ($count) {

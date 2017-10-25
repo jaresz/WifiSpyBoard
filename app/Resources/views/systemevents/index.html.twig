@@ -32,11 +32,9 @@
                 <td>{{ systemevent.syslogtag }}</td>
                 <td>{{ systemevent.id }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('system_events_show', { 'id': systemevent.id }) }}">show</a>
-                        </li>
-                    </ul>
+                   
+                            <a href="{{ path('system_events_show', { 'id': systemevent.id }) }}" class="btn btn-default">show</a>
+                        
                 </td>
             </tr>
         {% endfor %}
