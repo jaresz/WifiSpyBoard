@@ -1,0 +1,31 @@
+ {{ form_start(form) }}
+<div class="row">
+	<div class="col-md-12">{{ form_errors(form) }}</div>
+</div>
+<div class="row">
+	<div class="col-md-6">{{ form_row(form.ip) }}</div>
+	<div class="col-md-6">{{ form_row(form.mac) }}</div>
+</div>
+<div class="row">
+	<div class="col-md-6">{{ form_row(form.selfName) }}</div>
+	<div class="col-md-6">{{ form_row(form.givenName) }}</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">{{ form_rest(form) }}</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+
+			<div class="btn-group" role="group" aria-label="...">
+				<button type="submit" value="save" name="save"
+					class="btn btn-primary">Zapisz</button>
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
+{{ form_end(form) }}

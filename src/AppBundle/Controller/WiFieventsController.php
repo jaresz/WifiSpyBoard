@@ -19,7 +19,7 @@ class WiFieventsController extends Controller
     /**
      * Lists all systemevent entities.
      *
-     * @Route("/", name="wifi_events_index")
+     * @Route("/events/", name="wifi_events_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -58,7 +58,7 @@ class WiFieventsController extends Controller
     /**
      * Lists all systemevent entities.
      *
-     * @Route("/mac/", name="wifi_sessions")
+     * @Route("/sessions/", name="wifi_sessions")
      * @Method("GET")
      */
     public function indexMacAction()
