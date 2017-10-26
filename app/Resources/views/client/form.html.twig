@@ -10,6 +10,20 @@
 	<div class="col-md-6">{{ form_row(form.selfName) }}</div>
 	<div class="col-md-6">{{ form_row(form.givenName) }}</div>
 </div>
+<div class="row">
+	
+
+        {% for child in form.cssClass.children %}
+            <div class="col-md-2">          
+                <label style="display: block; border: 2px solid #444;" class="expanded clientName {{ child.vars.value }}" for="{{ child.vars.id }}">
+                    {{ form_widget(child) }}
+                   
+                </label>
+            </div>
+        {% endfor %}
+
+	
+</div>
 
 <div class="row">
 	<div class="col-md-12">{{ form_rest(form) }}</div>
