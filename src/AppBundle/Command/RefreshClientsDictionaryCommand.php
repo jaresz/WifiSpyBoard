@@ -6,26 +6,11 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use AppBundle\Model\ClientsRefresher;
 
 class RefreshClientsDictionaryCommand extends ContainerAwareCommand
 {
-    protected function insertOrUpdateClientInfo($dhcpFields)
-    {
-        $conn = $this->getContainer()->get('doctrine.dbal.default_connection');
-        $client = ['mac'=>$dhcpFields['chaddr'], 'self_name'=>$dhcpFields['Host-Name']];
-        if (isset($dhcpFields['yiaddr']) && $dhcpFields['yiaddr']) $client['ip'] = $dhcpFields['yiaddr'];        
-        $now = new \DateTime();
-        $existing =  $conn->fetchAssoc('SELECT * FROM client WHERE mac = ?', array($client['mac']));
-        if ($existing) {
-            $client['updated'] = $now->format('Y-m-d H:i:s');
-            $conn->update('client', $client, ['id'=>$existing['id']]);
-        } else {
-            $client['css_class'] = 'client'.rand(0,28); 
-            $client['created'] = $now->format('Y-m-d H:i:s');
-            $client['updated'] = $now->format('Y-m-d H:i:s');
-            $conn->insert('client', $client);
-        }
-    }
+
 
     protected function configure()
     {
@@ -49,6 +34,9 @@ class RefreshClientsDictionaryCommand extends ContainerAwareCommand
         $output->writeln('RefreshClientsDictionaryCommand');
         
         $conn = $this->getContainer()->get('doctrine.dbal.default_connection');
+        
+        $clientsRefresher = new ClientsRefresher($conn);
+        
         $reta = $conn->fetchAll('SELECT deviceReportedTime, fromHost, GROUP_CONCAT(TRIM(Message) SEPARATOR "\n") as msg
                                 FROM SystemEvents
                                 WHERE 
@@ -93,7 +81,8 @@ class RefreshClientsDictionaryCommand extends ContainerAwareCommand
                 $output->write($dhcpFields['chaddr']);
                 $output->write("\t");
                 $output->write($dhcpFields['Host-Name']);
-                $this->insertOrUpdateClientInfo($dhcpFields);
+                
+                $clientsRefresher->insertOrUpdateClientInfo($dhcpFields);
             }
             $output->writeln(" ");
         }
