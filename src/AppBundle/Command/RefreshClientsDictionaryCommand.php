@@ -37,55 +37,12 @@ class RefreshClientsDictionaryCommand extends ContainerAwareCommand
         
         $clientsRefresher = new ClientsRefresher($conn);
         
-        $reta = $conn->fetchAll('SELECT deviceReportedTime, fromHost, GROUP_CONCAT(TRIM(Message) SEPARATOR "\n") as msg
-                                FROM SystemEvents
-                                WHERE 
-                                	SysLogTag = "DHCP:"
-                                AND (
-                                       Message LIKE "%Client-Id =%" OR Message LIKE "%Class-Id =%"  
-                                    OR Message LIKE "%Host-Name =%"  OR Message LIKE "%chaddr =%"
-                                    OR Message LIKE "%Server-Id =%" 
-                                    OR Message LIKE "%yiaddr =%"                                     
-                                    )
-                                GROUP BY DeviceReportedTime, fromHost
-                                
-                                ');
-        foreach ($reta as $row) {
-            $output->write($row['deviceReportedTime']);            
-            $output->write("\t");
-            /*
-            $output->write($row['fromHost']);
-            $output->write("\t");
-            $output->writeln($row['msg']);
-            */
-            $lines = explode("\n", $row['msg']);
-            $dhcpFields = [];
-            if (count($lines))
-            foreach ($lines as $line) {
-                //$output->writeln("-<value>".$line."</value>");
-                if (strstr($line, ' = ')) {
-                    $linepart = explode(' = ', $line);
-                    //dump($linepart);
-                    if (count($linepart)>1) {
-                        $varName = trim($linepart[0]);
-                        $varVal = trim($linepart[1]);
-                        //$output->write("\t<var>".$varName."</var>: ");
-                        //$output->write("<value>".$varVal."</value>\n");
-                        $dhcpFields[$varName] = $varVal;
-                        
-                    }
-                }
-            }
-            if (count($dhcpFields)>1 && isset($dhcpFields['chaddr']) && $dhcpFields['chaddr'] && isset($dhcpFields['Host-Name'])) {
-                $dhcpFields['Host-Name'] = str_replace('"', '', $dhcpFields['Host-Name']);
-                $output->write($dhcpFields['chaddr']);
-                $output->write("\t");
-                $output->write($dhcpFields['Host-Name']);
-                
-                $clientsRefresher->insertOrUpdateClientInfo($dhcpFields);
-            }
-            $output->writeln(" ");
+        $resulines = $clientsRefresher->refreshClients();
+       
+        foreach ($resulines as $chaddr=>$hostName) {
+           $output->writeln($chaddr."\t".$hostName);            
         }
+        
     }
 }
 

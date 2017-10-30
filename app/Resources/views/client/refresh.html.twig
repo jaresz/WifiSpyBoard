@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Clients list</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>             
+                <th>Mac</th>
+                <th>Selfname</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mac,selfname in resulines %}
+            <tr>
+            
+                <td>{{ mac }}</td>
+                <td>{{ selfname }}</td>
+               
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

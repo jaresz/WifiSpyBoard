@@ -6,7 +6,7 @@ use AppBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
-
+use AppBundle\Model\ClientsRefresher;
 /**
  * Client controller.
  *
@@ -100,7 +100,26 @@ class ClientController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-
+    
+    /**
+     * Refresh host names associated with mac adress
+     *
+     * @Route("-refresh", name="client_refresh")
+     * @Method("GET")
+     */
+    public function refreshAction()
+    {
+        $conn = $this->get('doctrine.dbal.default_connection');
+    
+        $clientsRefresher = new ClientsRefresher($conn);
+    
+        $resulines = $clientsRefresher->refreshClients();
+    
+        return $this->render('client/refresh.html.twig', array(
+            'resulines' => $resulines,
+        ));
+    }
+    
     /**
      * Deletes a client entity.
      *
@@ -120,7 +139,8 @@ class ClientController extends Controller
 
         return $this->redirectToRoute('client_index');
     }
-
+    
+    
     /**
      * Creates a form to delete a client entity.
      *
