@@ -44,6 +44,14 @@ class ClientsRefresher
     {
         $conn = $this->getConn();
         
+        $lastDate = $conn->fetchColumn('SELECT MAX(updated) as maxDate FROM client');
+        
+        if ($lastDate) {
+            $dateCondition = " AND DeviceReportedTime >= '$lastDate' ";
+        } else {
+            $dateCondition = '';
+        }
+        
         $reta = $conn->fetchAll('SELECT deviceReportedTime, fromHost, GROUP_CONCAT(TRIM(Message) SEPARATOR "\n") as msg
                                 FROM SystemEvents
                                 WHERE
@@ -53,7 +61,8 @@ class ClientsRefresher
                                     OR Message LIKE "%Host-Name =%"  OR Message LIKE "%chaddr =%"
                                     OR Message LIKE "%Server-Id =%"
                                     OR Message LIKE "%yiaddr =%"
-                                    )
+                                    )'
+                                    .$dateCondition.'
                                 GROUP BY DeviceReportedTime, fromHost
     
                                 ');
@@ -77,10 +86,14 @@ class ClientsRefresher
                     }
                 }
             if (count($dhcpFields) > 1 && isset($dhcpFields['chaddr']) && $dhcpFields['chaddr'] && isset($dhcpFields['Host-Name'])) {
-                $dhcpFields['Host-Name'] = str_replace('"', '', $dhcpFields['Host-Name']);
-                $resulines[$dhcpFields['chaddr']] = $dhcpFields['Host-Name'];                    
-                $this->insertOrUpdateClientInfo($dhcpFields);
+               $dhcpFields['Host-Name'] = str_replace('"', '', $dhcpFields['Host-Name']);
+               $resulines[$dhcpFields['chaddr']] = ['Host-Name'=>$dhcpFields['Host-Name'], 'ip'=>@$dhcpFields['yiaddr'], 'chaddr'=>$dhcpFields['chaddr']];                    
+                
             }
+        }
+        
+        foreach ($resulines as $dhcpFields) {
+            $this->insertOrUpdateClientInfo($dhcpFields);
         }
         
         return $resulines;

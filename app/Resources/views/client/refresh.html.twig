@@ -11,11 +11,11 @@
             </tr>
         </thead>
         <tbody>
-        {% for mac,selfname in resulines %}
+        {% for client in resulines %}
             <tr>
             
-                <td>{{ mac }}</td>
-                <td>{{ selfname }}</td>
+                <td>{{ client.chaddr }}</td>
+                <td>{{ client['Host-Name'] }}</td>
                
             </tr>
         {% endfor %}

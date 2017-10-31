@@ -39,8 +39,8 @@ class RefreshClientsDictionaryCommand extends ContainerAwareCommand
         
         $resulines = $clientsRefresher->refreshClients();
        
-        foreach ($resulines as $chaddr=>$hostName) {
-           $output->writeln($chaddr."\t".$hostName);            
+        foreach ($resulines as $clie) {
+           $output->writeln($clie['chaddr']."\t".$clie['Host-Name']);            
         }
         
     }
