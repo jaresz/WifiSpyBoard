@@ -13,6 +13,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('default/index.html.twig');
+        return $this->redirect($this->generateUrl('wifi_sessions'));
+        //return $this->render('default/index.html.twig');
     }
 }
