@@ -74,7 +74,7 @@ class WiFieventsController extends Controller
         $clientTools = new ClientTools($em);
         
         $fromPoinInTime = new \DateTime();
-        $fromPoinInTime->modify('-2 days');
+        $fromPoinInTime->modify('-3 days');
     
         $conn = $this->getDoctrine()->getConnection();
         
