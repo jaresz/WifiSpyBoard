@@ -74,7 +74,10 @@ class WiFieventsController extends Controller
         $clientTools = new ClientTools($em);
         
         $fromPoinInTime = new \DateTime();
-        $fromPoinInTime->modify('-3 days');
+        $nadaysBack = $this->container
+        ->getParameter('days_back');
+        if (!$nadaysBack || $nadaysBack<1) $nadaysBack=3;
+        $fromPoinInTime->modify('-'.$nadaysBack.' days');
     
         $conn = $this->getDoctrine()->getConnection();
         
