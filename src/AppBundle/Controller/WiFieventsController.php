@@ -85,7 +85,7 @@ class WiFieventsController extends Controller
                 MAX(SystemEvents.ReceivedAt) AS lastTime
                 FROM SystemEvents
                 LEFT JOIN eventConnected ON eventConnected.system_event_connected_id = SystemEvents.ID
-                WHERE (SystemEvents.message LIKE '% connected' )
+                WHERE (SystemEvents.message LIKE '% connected%' )
                 AND SystemEvents.syslogtag = 'WiFi:'
                 AND SystemEvents.ReceivedAt >= ?
                 GROUP BY SystemEvents.FromHost, eventConnected.mac

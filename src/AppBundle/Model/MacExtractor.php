@@ -27,7 +27,7 @@ class MacExtractor extends AbstractClassWithEntityManager
         ->where("Systemevents.syslogtag=:syslogtag")
         ->setParameter('syslogtag', 'WiFi:')
         ->andWhere("EventConnected.mac IS NULL")
-        ->andWhere("Systemevents.message LIKE '% connected'")
+        ->andWhere("Systemevents.message LIKE '% connected%'")
         ->addOrderBy('Systemevents.id', 'ASC')
         ->setMaxResults(500);
         // OR Systemevents.message LIKE '%disconnected%'
